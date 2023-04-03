@@ -1,0 +1,8 @@
+.header {
+    padding: 20px 0;
+}
+
+.header__title {
+    text-transform: uppercase;
+    margin: 20px;
+}
