@@ -23,12 +23,17 @@ function App() {
     });
   };
 
+  const resetResult = () => {
+    setResult(undefined);
+  };
+
   return (
     <Container>
       <Header title="Przelicznik walut" />
       <Form
         result={result}
         calculateResult={calculateResult}
+        resetResult={resetResult}
       />
       <Footer />
     </Container>
