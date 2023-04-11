@@ -3,7 +3,7 @@ import "./style.css";
 import { currencies } from "../currencies";
 import Result from "./Result";
 
-const Form = ({ calculateResult, result }) => {
+const Form = ({ calculateResult, result, resetResult }) => {
 
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState(currencies[0].short);
@@ -13,8 +13,13 @@ const Form = ({ calculateResult, result }) => {
     calculateResult(currency, amount);
   };
 
+  const onFormReset = () => {
+    setAmount("");
+    resetResult();
+  };
+
   return (
-    <form className="form" onSubmit={onFormSubmit}>
+    <form className="form">
       <p>
         <label>
           <span className="form__labelText">Kwota w zł*:</span>
@@ -52,11 +57,21 @@ const Form = ({ calculateResult, result }) => {
       <p className="form__paragraph">
         <button
           className="form__button"
+          onClick={onFormSubmit}
         >
           Przelicz
         </button>
+        <button
+          className="form__button form__button--reset"
+          type="reset"
+          onClick={onFormReset}
+        >
+          Wyczyść
+        </button>
       </p>
-      <Result result={result} />
+      <Result
+        result={result}
+      />
     </form>
   );
 };
