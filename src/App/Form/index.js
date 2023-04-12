@@ -10,18 +10,17 @@ const Form = ({ calculateResult, result, resetResult }) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    if (amount > 0) {
-      calculateResult(currency, amount);
-    };
+    calculateResult(currency, amount);
   };
 
   const onFormReset = () => {
     setAmount("");
+    setCurrency(currencies[0].short);
     resetResult();
   };
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={onFormSubmit} onReset={onFormReset}>
       <p>
         <label>
           <span className="form__labelText">Kwota w zł*:</span>
@@ -32,6 +31,7 @@ const Form = ({ calculateResult, result, resetResult }) => {
             className="form__field"
             type="number"
             step="0.01"
+            min="0"
             required
           />
         </label>
@@ -58,14 +58,13 @@ const Form = ({ calculateResult, result, resetResult }) => {
       <p className="form__paragraph">
         <button
           className="form__button"
-          onClick={onFormSubmit}
+          type="submit"
         >
           Przelicz
         </button>
         <button
           className="form__button form__button--reset"
           type="reset"
-          onClick={onFormReset}
         >
           Wyczyść
         </button>
