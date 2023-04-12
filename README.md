@@ -1,6 +1,6 @@
 # CURRENCY CONVERTER
 ## Demo
-You can visit my website here: [currency-converter]()
+You can visit my website here: [currency-converter](https://justynakow.github.io/currency-converter-react/)
 ## Description
 Simple currency converter. This is a project from the youcode course.
 ## Preview
@@ -11,7 +11,6 @@ Simple currency converter. This is a project from the youcode course.
 - JavaScript
 - BEM
 - ES6 + features
-- GRID
 - FLEX
 - Immutability
 - React
