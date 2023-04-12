@@ -24,7 +24,7 @@ function App() {
   };
 
   const resetResult = () => {
-    setResult(undefined);
+    setResult();
   };
 
   return (

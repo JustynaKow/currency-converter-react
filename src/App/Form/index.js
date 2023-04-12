@@ -10,7 +10,9 @@ const Form = ({ calculateResult, result, resetResult }) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    calculateResult(currency, amount);
+    if (amount > 0) {
+      calculateResult(currency, amount);
+    };
   };
 
   const onFormReset = () => {
@@ -25,13 +27,12 @@ const Form = ({ calculateResult, result, resetResult }) => {
           <span className="form__labelText">Kwota w zł*:</span>
           <input
             value={amount}
+            onChange={({ target }) => setAmount(target.value)}
             placeholder="Wpisz kwotę w zł"
             className="form__field"
             type="number"
             step="0.01"
-            min="0"
             required
-            onChange={({ target }) => setAmount(target.value)}
           />
         </label>
       </p>
