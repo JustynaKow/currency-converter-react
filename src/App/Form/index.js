@@ -3,7 +3,7 @@ import "./style.css";
 import { currencies } from "../currencies";
 import Result from "./Result";
 
-const Form = ({ calculateResult, result, resetResult }) => {
+const Form = ({ calculateResult, result, setResult }) => {
 
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState(currencies[0].short);
@@ -11,6 +11,10 @@ const Form = ({ calculateResult, result, resetResult }) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
     calculateResult(currency, amount);
+  };
+
+  const resetResult = () => {
+    setResult();
   };
 
   const onFormReset = () => {

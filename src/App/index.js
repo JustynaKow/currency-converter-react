@@ -6,7 +6,6 @@ import Footer from "./Footer";
 import { useState } from 'react';
 import { currencies } from "./currencies";
 
-
 function App() {
 
   const [result, setResult] = useState();
@@ -23,17 +22,13 @@ function App() {
     });
   };
 
-  const resetResult = () => {
-    setResult();
-  };
-
   return (
     <Container>
       <Header title="Przelicznik walut" />
       <Form
         result={result}
         calculateResult={calculateResult}
-        resetResult={resetResult}
+        setResult={setResult}
       />
       <Footer />
     </Container>
