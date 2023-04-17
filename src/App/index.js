@@ -1,5 +1,6 @@
 import "./index.css";
 import Container from "./Container";
+import Clock from "./Clock";
 import Header from "./Header"
 import Form from "./Form";
 import Footer from "./Footer";
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <Container>
+      <Clock />
       <Header title="Przelicznik walut" />
       <Form
         result={result}
