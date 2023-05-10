@@ -1,7 +1,8 @@
 export const theme = {
     color: {
-        black: "#000",
         white: "#fff",
+        cloud: "#212652",
+        haiti: "#0e1234",
     },
     breakpoint: {
         mobileMax: 767,
