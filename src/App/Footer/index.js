@@ -1,14 +1,14 @@
-import "./style.css";
+import { Wrapper, Paragraph } from "./styled";
 
 const Footer = () => (
-    <footer className="footer">
-        <p className="footer__paragraph">
+    <Wrapper>
+        <Paragraph>
             * Pole obowiązkowe
-        </p>
-        <p className="footer__paragraph">
+        </Paragraph>
+        <Paragraph>
             Kursy z Tabeli nr 031/A/NBP/2023 z dnia 2023-02-14
-        </p>
-    </footer>
+        </Paragraph>
+    </Wrapper>
 );
 
 export default Footer;
