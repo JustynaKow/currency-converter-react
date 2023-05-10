@@ -4,7 +4,4 @@ export const theme = {
         cloud: "#212652",
         haiti: "#0e1234",
     },
-    breakpoint: {
-        mobileMax: 767,
-    },
 };
