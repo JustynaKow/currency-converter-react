@@ -19,6 +19,8 @@ Simple currency converter. This is a project from the youcode course.
 - Node.js
 - State Hook
 - Effect Hook
+- Custom Hooks
+- Styled Components
 
 # Getting Started with Create React App
 
