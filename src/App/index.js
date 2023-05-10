@@ -1,4 +1,3 @@
-import "./index.css";
 import Container from "./Container";
 import Clock from "./Clock";
 import Header from "./Header"
