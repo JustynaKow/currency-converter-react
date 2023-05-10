@@ -1,11 +1,11 @@
-import "./style.css";
+import { Wrapper, Title } from "./styled";
 
 const Header = ({ title }) => (
-    <header className="header">
-        <h1 className="header__title">
+    <Wrapper>
+        <Title>
             {title}
-        </h1>
-    </header>
+        </Title>
+    </Wrapper>
 );
 
 export default Header;

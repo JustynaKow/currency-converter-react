@@ -24,7 +24,7 @@ const Form = ({ calculateResult, result, setResult }) => {
   };
 
   return (
-    <form className="form" onSubmit={onFormSubmit} onReset={onFormReset}>
+    <form onSubmit={onFormSubmit} onReset={onFormReset}>
       <p>
         <label>
           <LabelText>Kwota w zł*:</LabelText>
