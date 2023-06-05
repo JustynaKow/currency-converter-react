@@ -17,8 +17,9 @@ Simple currency converter. This is a project from the youcode course.
 - Babel
 - Webpack
 - Node.js
-- State Hook
-- Effect Hook
+- useState
+- useEffect
+- useRef
 - Custom Hooks
 - Styled Components
 
