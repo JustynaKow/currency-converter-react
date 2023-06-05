@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { currencies } from "../currencies";
 import Result from "./Result";
 import { LabelText, Field, Buttons, Button, ResetButton } from "./styled";
@@ -7,21 +7,24 @@ const Form = ({ calculateResult, result, setResult }) => {
 
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState(currencies[0].short);
+  const fieldRef = useRef(null);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     calculateResult(currency, amount);
   };
 
-  const resetResult = () => {
+  const onFormReset = () => {
     setResult();
+    setCurrency(currencies[0].short);
+    setAmount("");
   };
 
-  const onFormReset = () => {
-    setAmount("");
-    setCurrency(currencies[0].short);
-    resetResult();
-  };
+  useEffect(() => {
+    if (amount === "") {
+      fieldRef.current.focus();
+    }
+  }, [amount]);
 
   return (
     <form onSubmit={onFormSubmit} onReset={onFormReset}>
@@ -36,6 +39,8 @@ const Form = ({ calculateResult, result, setResult }) => {
             step="0.01"
             min="0"
             required
+            ref={fieldRef}
+            autoFocus
           />
         </label>
       </p>
