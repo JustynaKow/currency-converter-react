@@ -1,10 +1,10 @@
-import Container from "./Container";
 import Clock from "./Clock";
 import Header from "./Header"
 import Form from "./Form";
 import Footer from "./Footer";
 import { useState } from 'react';
 import { currencies } from "./currencies";
+import { Wrapper } from "./styled";
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
   };
 
   return (
-    <Container>
+    <Wrapper>
       <Clock />
       <Header title="Przelicznik walut" />
       <Form
@@ -32,7 +32,7 @@ function App() {
         setResult={setResult}
       />
       <Footer />
-    </Container>
+    </Wrapper>
   );
 };
 

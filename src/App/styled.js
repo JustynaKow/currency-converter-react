@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import backgorund1 from "../../images/background1.png";
+import backgorund1 from "../images/background1.png";
 
-export const Main = styled.main`
+export const Wrapper = styled.main`
     max-width: 800px;
     margin: 50px auto;
     text-align: center;
