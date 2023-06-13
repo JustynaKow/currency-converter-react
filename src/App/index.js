@@ -1,7 +1,6 @@
 import Clock from "./Clock";
 import Header from "./Header"
 import Form from "./Form";
-import Footer from "./Footer";
 import { useState } from 'react';
 import { currencies } from "./currencies";
 import { Wrapper } from "./styled";
@@ -31,7 +30,6 @@ function App() {
         calculateResult={calculateResult}
         setResult={setResult}
       />
-      <Footer />
     </Wrapper>
   );
 };

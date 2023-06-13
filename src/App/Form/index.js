@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { currencies } from "../currencies";
 import Result from "./Result";
-import { LabelText, Field, Buttons, Button, ResetButton } from "./styled";
+import { LabelText, Field, Buttons, Button, ResetButton, Paragraph } from "./styled";
 
 const Form = ({ calculateResult, result, setResult }) => {
 
@@ -78,6 +78,12 @@ const Form = ({ calculateResult, result, setResult }) => {
       <Result
         result={result}
       />
+      <Paragraph>
+        * Pole obowiązkowe
+      </Paragraph>
+      <Paragraph>
+        Kursy z Tabeli nr 031/A/NBP/2023 z dnia 2023-02-14
+      </Paragraph>
     </form>
   );
 };

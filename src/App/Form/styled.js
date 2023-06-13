@@ -46,3 +46,8 @@ export const ResetButton = styled(Button)`
         color: ${({theme}) => theme.color.white};
     }
 `;
+
+export const Paragraph = styled.p`
+    font-size: small;
+    padding: 10px;
+`;
