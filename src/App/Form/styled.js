@@ -51,3 +51,17 @@ export const Paragraph = styled.p`
     font-size: small;
     padding: 10px;
 `;
+
+export const Loading = styled.p`
+    color: ${({theme}) => theme.color.green};
+    padding: 100px;
+`;
+
+export const Failure = styled.p`
+    color: ${({theme}) => theme.color.red};
+    padding: 100px;
+`;
+
+export const Wrapper = styled.form`
+    height: 500px;
+`;

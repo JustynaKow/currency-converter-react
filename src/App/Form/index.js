@@ -1,13 +1,25 @@
-import { useState, useRef, useEffect } from 'react';
-import { currencies } from "../currencies";
+import { useState, useRef } from 'react';
 import Result from "./Result";
-import { LabelText, Field, Buttons, Button, ResetButton, Paragraph } from "./styled";
+import { LabelText, Field, Buttons, Button, ResetButton, Paragraph, Loading, Failure, Wrapper } from "./styled";
+import { useRatesData } from './useRatesData';
 
-const Form = ({ calculateResult, result, setResult }) => {
-
+const Form = () => {
+  const [currency, setCurrency] = useState("EUR");
   const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState(currencies[0].short);
+  const [result, setResult] = useState();
+  const ratesData = useRatesData();
+  const date = ratesData.date;
   const fieldRef = useRef(null);
+
+  const calculateResult = (currency, amount) => {
+    const rate = ratesData.rates[currency];
+
+    setResult({
+      sourceAmount: +amount,
+      targetAmount: amount * rate,
+      currency,
+    });
+  };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -16,75 +28,85 @@ const Form = ({ calculateResult, result, setResult }) => {
 
   const onFormReset = () => {
     setResult();
-    setCurrency(currencies[0].short);
     setAmount("");
   };
 
-  useEffect(() => {
-    if (amount === "") {
-      fieldRef.current.focus();
-    }
-  }, [amount]);
-
   return (
-    <form onSubmit={onFormSubmit} onReset={onFormReset}>
-      <p>
-        <label>
-          <LabelText>Kwota w zł*:</LabelText>
-          <Field
-            value={amount}
-            onChange={({ target }) => setAmount(target.value)}
-            placeholder="Wpisz kwotę w zł"
-            type="number"
-            step="0.01"
-            min="0"
-            required
-            ref={fieldRef}
-            autoFocus
-          />
-        </label>
-      </p>
-      <p>
-        <label>
-          <LabelText>Waluta:</LabelText>
-          <Field
-            as="select"
-            value={currency}
-            onChange={({ target }) => setCurrency(target.value)}
-          >
-            {currencies.map(currency => (
-              <option
-                key={currency.short}
-                value={currency.short}
-              >
-                {currency.name}
-              </option>
-            ))}
-          </Field>
-        </label>
-      </p>
-      <Buttons>
-        <Button
-          type="submit"
-        >
-          Przelicz
-        </Button>
-        <ResetButton
-          type="reset"
-        >
-          Wyczyść
-        </ResetButton>
-      </Buttons>
-      <Result
-        result={result}
-      />
-      <Paragraph>
-        * Pole obowiązkowe
-      </Paragraph>
-      <Paragraph>
-        Kursy z Tabeli nr 031/A/NBP/2023 z dnia 2023-02-14
-      </Paragraph>
-    </form>
+    <Wrapper onSubmit={onFormSubmit} onReset={onFormReset}>
+      {ratesData.state === "loading"
+        ? (
+          <Loading>
+            Sekundka ... <br /> Ładuję kursy walut z Europejskiego Banku Centralnego
+          </Loading>
+        ) : (
+          ratesData.status === "error" ? (
+            <Failure>
+              Hmm... Coś poszło nie tak. Sprawdź swoje połączenie z internetem.
+            </Failure>
+          ) : (
+            <>
+              <p>
+                <label>
+                  <LabelText>Kwota w zł*:</LabelText>
+                  <Field
+                    value={amount}
+                    onChange={({ target }) => setAmount(target.value)}
+                    placeholder="Wpisz kwotę w zł"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    required
+                    ref={(inputRef) => (fieldRef.current = inputRef)}
+                    autoFocus
+                  />
+                </label>
+              </p>
+              <p>
+                <label>
+                  <LabelText>Waluta:</LabelText>
+                  <Field
+                    as="select"
+                    value={currency}
+                    onChange={({ target }) => setCurrency(target.value)}
+                  >
+                    {Object.keys(ratesData.rates).map(((currency) => (
+                      <option
+                        key={currency}
+                        value={currency}
+                      >
+                        {currency}
+                      </option>
+                    )))
+                    }
+                  </Field>
+                </label>
+              </p>
+              <Buttons>
+                <Button
+                  type="submit"
+                >
+                  Przelicz
+                </Button>
+                <ResetButton
+                  type="reset"
+                >
+                  Wyczyść
+                </ResetButton>
+              </Buttons>
+              <Result
+                result={result}
+              />
+              <Paragraph>
+                * Pole obowiązkowe
+              </Paragraph>
+              <Paragraph>
+                Kursy z Europejskiego Banku Centralnego z dnia {date}.
+              </Paragraph>
+            </>
+          )
+        )
+      }
+    </Wrapper>
   );
 };
 
