@@ -22,6 +22,12 @@ Simple currency converter. This is a project from the youcode course.
 - useRef
 - Custom Hooks
 - Styled Components
+- Global Style
+- theme (ThemeProvider)
+- SetTimeout
+- Fetch/Axios
+- Downloading data from public API
+- Async Functions
 
 # Getting Started with Create React App
 
