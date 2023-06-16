@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Result from "./Result";
 import { LabelText, Field, Buttons, Button, ResetButton, Paragraph, Loading, Failure, Wrapper } from "./styled";
 import { useRatesData } from './useRatesData';
@@ -8,8 +8,6 @@ const Form = () => {
   const [amount, setAmount] = useState("");
   const [result, setResult] = useState();
   const ratesData = useRatesData();
-  const date = ratesData.date;
-  const fieldRef = useRef(null);
 
   const calculateResult = (currency, amount) => {
     const rate = ratesData.rates[currency];
@@ -56,7 +54,6 @@ const Form = () => {
                     step="0.01"
                     min="0"
                     required
-                    ref={(inputRef) => (fieldRef.current = inputRef)}
                     autoFocus
                   />
                 </label>
@@ -100,7 +97,7 @@ const Form = () => {
                 * Pole obowiązkowe
               </Paragraph>
               <Paragraph>
-                Kursy z Europejskiego Banku Centralnego z dnia {date}.
+                Kursy z Europejskiego Banku Centralnego z dnia {ratesData.date}.
               </Paragraph>
             </>
           )
