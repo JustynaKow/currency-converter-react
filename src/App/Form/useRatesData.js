@@ -5,12 +5,12 @@ export const useRatesData = () => {
     const [ratesData, setRatesData] = useState({
         state: "loading",
     });
+    const API_URL = "https://api.exchangerate.host/latest?base=pln";
 
     useEffect(() => {
         const axiosRates = async () => {
             try {
-                const response = await axios.get("https://api.exchangerate.host/latest?base=pln");
-
+                const response = await axios.get(API_URL);
                 const { rates, date } = response.data;
 
                 setRatesData({
