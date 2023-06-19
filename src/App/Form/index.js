@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Result from "./Result";
 import { LabelText, Field, Buttons, Button, ResetButton, Paragraph, Loading, Failure, Wrapper } from "./styled";
 import { useRatesData } from './useRatesData';
@@ -7,7 +7,9 @@ const Form = () => {
   const [currency, setCurrency] = useState("EUR");
   const [amount, setAmount] = useState("");
   const [result, setResult] = useState();
+
   const ratesData = useRatesData();
+  const apiData = ratesData.date;
 
   const calculateResult = (currency, amount) => {
     const rate = ratesData.rates[currency];
@@ -24,10 +26,32 @@ const Form = () => {
     calculateResult(currency, amount);
   };
 
+  const fieldRef = useRef(null);
+  const currencySelectRef = useRef(null);
+  const [initialCurrency, setInitialCurrency] = useState("EUR");
+
   const onFormReset = () => {
     setResult();
     setAmount("");
+    setCurrency(initialCurrency);
+
+    if (fieldRef.current) {
+      setTimeout(() => {
+        fieldRef.current.focus();
+      }, 0);
+    }
+
+    if (currencySelectRef.current) {
+      setTimeout(() => {
+        currencySelectRef.current.value = initialCurrency;
+      }, 0);
+    }
   };
+
+  useEffect(() => {
+    setInitialCurrency(currency);
+  }, [currency]);
+
 
   return (
     <Wrapper onSubmit={onFormSubmit} onReset={onFormReset}>
@@ -55,6 +79,7 @@ const Form = () => {
                     min="0"
                     required
                     autoFocus
+                    ref={fieldRef}
                   />
                 </label>
               </p>
@@ -64,6 +89,7 @@ const Form = () => {
                   <Field
                     as="select"
                     value={currency}
+                    ref={currencySelectRef}
                     onChange={({ target }) => setCurrency(target.value)}
                   >
                     {Object.keys(ratesData.rates).map(((currency) => (
@@ -97,7 +123,7 @@ const Form = () => {
                 * Pole obowiązkowe
               </Paragraph>
               <Paragraph>
-                Kursy z Europejskiego Banku Centralnego z dnia {ratesData.date}.
+                Kursy z Europejskiego Banku Centralnego z dnia {apiData}.
               </Paragraph>
             </>
           )
