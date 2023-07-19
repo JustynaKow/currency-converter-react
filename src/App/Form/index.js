@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Result from "./Result";
 import { LabelText, Field, Buttons, Button, ResetButton, Paragraph, Loading, Failure, Wrapper } from "./styled";
 import { useRatesData } from './useRatesData';
@@ -26,32 +26,11 @@ const Form = () => {
     calculateResult(currency, amount);
   };
 
-  const fieldRef = useRef(null);
-  const currencySelectRef = useRef(null);
-  const [initialCurrency, setInitialCurrency] = useState("EUR");
-
   const onFormReset = () => {
     setResult();
     setAmount("");
-    setCurrency(initialCurrency);
-
-    if (fieldRef.current) {
-      setTimeout(() => {
-        fieldRef.current.focus();
-      }, 0);
-    }
-
-    if (currencySelectRef.current) {
-      setTimeout(() => {
-        currencySelectRef.current.value = initialCurrency;
-      }, 0);
-    }
+    setCurrency("EUR");
   };
-
-  useEffect(() => {
-    setInitialCurrency(currency);
-  }, [currency]);
-
 
   return (
     <Wrapper onSubmit={onFormSubmit} onReset={onFormReset}>
@@ -79,7 +58,6 @@ const Form = () => {
                     min="0"
                     required
                     autoFocus
-                    ref={fieldRef}
                   />
                 </label>
               </p>
@@ -89,7 +67,6 @@ const Form = () => {
                   <Field
                     as="select"
                     value={currency}
-                    ref={currencySelectRef}
                     onChange={({ target }) => setCurrency(target.value)}
                   >
                     {Object.keys(ratesData.rates).map(((currency) => (
